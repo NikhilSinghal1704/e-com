@@ -1,0 +1,198 @@
+<!-- Start Top Header Bar -->
+<section class="top-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-xs-12 col-sm-4">
+        <div class="contact-number">
+          <i class="tf-ion-ios-telephone"></i>
+          <span>+91 93105 99724</span>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12 col-sm-4">
+        <!-- Site Logo -->
+        <div class="logo text-center">
+          <a href="/">
+            <!-- replace logo here -->
+            <svg
+              width="100%"
+              height="100%"
+              viewBox="0 0 250 50"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+              <g
+                id="Page-1"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+                font-size="40"
+                font-family="AustinBold, Austin"
+                font-weight="bold"
+              >
+                <g
+                  id="Group"
+                  transform="translate(-108.000000, -297.000000)"
+                  fill="#000000"
+                >
+                  <text id="AVIATO">
+                    <tspan x="108.94" y="325">NIKSTORE</tspan>
+                  </text>
+                </g>
+              </g>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-4 col-xs-12 col-sm-4">
+        <!-- Cart -->
+        <ul class="top-menu text-right list-inline">
+          <li class="dropdown cart-nav dropdown-slide">
+            <a
+              href="#!"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              data-hover="dropdown"
+            >
+              <i class="tf-ion-android-cart"></i>Cart
+            </a>
+            {% if user.is_authenticated %}
+            <div class="dropdown-menu cart-dropdown">
+              <!-- Cart Item -->
+              {% if user.cart_set.all.exists %}
+              {% for item in user.cart_set.all|slice:":3" %}
+              <div class="media">
+                <a class="pull-left" href="#!">
+                  <img
+                    class="media-object"
+                    src="{{item.book.cover.url}}"
+                    alt="image"
+                  />
+                </a>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="#!">Ladies Bag</a></h4>
+                  <div class="cart-price">
+                    <span>Quantity : {{item.quantity}}</span>
+                  </div>
+                  <h5><strong>Price : ${{item.book.price}}/book</strong></h5>
+                </div>
+                <a href="{%  url 'removefromcart' item.book.id %}" class="remove"><i class="tf-ion-close"></i></a>
+              </div>
+              <!-- / Cart Item -->
+              {% endfor %}
+              <ul class="text-center cart-buttons">
+                <li>
+                  <a href="{% url 'cart'%}" class="btn btn-small">View Cart</a>
+                </li>
+                <li>
+                  <a href="checkout.html" class="btn btn-small btn-solid-border"
+                    >Checkout</a
+                  >
+                </li>
+              </ul>
+              {% else %}
+              <div class="media">
+                <strong>Add something to cart</strong>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+          </li>
+          <!-- / Cart -->
+
+          <!-- Search -->
+          <li class="dropdown search dropdown-slide">
+            <a
+              href="#!"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              data-hover="dropdown"
+            >
+              <i class="tf-ion-ios-search-strong"></i> Search
+            </a>
+            <ul class="dropdown-menu search-dropdown">
+              <li>
+                <form action="post">
+                  <input
+                    type="search"
+                    class="form-control"
+                    placeholder="Search..."
+                  />
+                </form>
+              </li>
+            </ul>
+          </li>
+          <!-- / Search -->
+
+          <!-- User Profile or Sign Up -->
+          {% if user.is_authenticated %}
+          <li class="dropdown user-profile dropdown-slide">
+            <a
+              href="#!"
+              class="dropdown-toggle"
+              data-toggle="dropdown"
+              data-hover="dropdown"
+            >
+              <img
+                src="{{ user.profile_pic.url }}"
+                alt="Profile Picture"
+                class="img-circle"
+                width="30"
+                height="30"
+              />
+            </a>
+            <ul class="dropdown-menu user-dropdown">
+              <li><a href="{% url 'profile_details' %}">Profile</a></li>
+              <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'SignUp' %}" class="btn btn-primary"
+              >Sign Up</a
+            >
+          </li>
+          {% endif %}
+          <!-- / User Profile or Sign Up -->
+        </ul>
+        <!-- / .nav .navbar-nav .navbar-right -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Top Header Bar -->
+
+<!-- Main Menu Section -->
+<section class="menu">
+	<nav class="navbar navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<h2 class="menu-title">Main Menu</h2>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+					aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+
+			</div><!-- / .navbar-header -->
+
+			<!-- Navbar Links -->
+			<div id="navbar" class="navbar-collapse collapse text-center">
+				<ul class="nav navbar-nav">
+
+					<!-- Home -->
+					<li class="dropdown ">
+						<a href="/">Home</a>
+					</li><!-- / Home -->
+					<li class="dropdown ">
+						<a href="/">Shop</a>
+					</li>
+
+			</div>
+			<!--/.navbar-collapse -->
+		</div><!-- / .container -->
+	</nav>
+</section>
